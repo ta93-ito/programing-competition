@@ -1,23 +1,29 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"math"
+	"os"
 	"sort"
 )
 
 func main() {
+	r := bufio.NewReader(os.Stdin)
+	w := bufio.NewWriter(os.Stdout)
+	defer w.Flush()
+
 	var n, m int
 	fmt.Scan(&n, &m)
 	a := make([]int, n)
 	b := make([]int, m)
 
 	for i := 0; i < n; i++ {
-		fmt.Scan(&a[i])
+		fmt.Fscan(r, &a[i])
 	}
 
 	for i := 0; i < m; i++ {
-		fmt.Scan(&b[i])
+		fmt.Fscan(r, &b[i])
 	}
 
 	sort.Ints(a)
