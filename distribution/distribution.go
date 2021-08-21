@@ -24,18 +24,22 @@ func main() {
 	for i := 0; i < n; i++ {
 		fmt.Fscan(r, &t[i])
 	}
-	snukes := make([]int, n)
-	for i := 0; i < len(snukes); i++ {
-		snukes[i] = t[i]
+
+	for i := 0; i < 2*n; i++ {
+		from := i % n
+		next := (i + 1) % n
+		t[next] = min(t[from]+s[from], t[next])
+
 	}
-	for i := 0; i < len(t); i++ {
-		for j := 0; j < len(s); j++ {
-			if snukes[(j+1)%n] > snukes[j]+s[j] {
-				snukes[(j+1)%n] = snukes[j] + s[j]
-			}
-		}
+	for i := 0; i < n; i++ {
+		fmt.Println(t[i])
 	}
-	for i := 0; i < len(snukes); i++ {
-		fmt.Println(snukes[i])
+}
+
+func min(a, b int) int {
+	if a < b {
+		return a
+	} else {
+		return b
 	}
 }
