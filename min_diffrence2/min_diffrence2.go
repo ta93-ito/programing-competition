@@ -23,23 +23,14 @@ func main() {
 	sort.Slice(a, func(i, j int) bool { return a[i] < a[j] })
 	sort.Slice(b, func(i, j int) bool { return b[i] < b[j] })
 
-	jfrom := 0
 	minv := 1000000000
 
-	for i := 0; i < n; i++ {
-		jcont := true
-
-		for j := jfrom; j < m && jcont; j++ {
-			fmt.Println(i, j)
-			if minv > abs(a[i]-b[j]) {
-				minv = abs(a[i] - b[j])
-				if a[i]-b[j] > 0 {
-					jfrom = j + 1
-				}
-			}
-			if b[j] > a[i] {
-				jcont = false
-			}
+	for i, j := 0, 0; i < n && j < m; {
+		minv = abs(a[i] - b[j])
+		if a[i] > b[j] {
+			j++
+		} else {
+			i++
 		}
 	}
 	fmt.Println(minv)
